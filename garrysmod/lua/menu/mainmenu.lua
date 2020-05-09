@@ -337,23 +337,6 @@ function GetServers( category, id )
 
 end
 
-local idSrv=0
-local data2 = {
-	Callback = function( ping, name, desc, map, players, maxplayers, botplayers, pass, lastplayed, address, gamemode, workshopid )
-		local players=players..'/'..maxplayers
-		idSrv=idSrv+1
-		print("[Debug] Added server:"..idSrv.." "..name.." - "..address.." with "..players)
-		pnlMainMenu:Call( string.format( 'AddSmartFavServer( "%i", "%s", "%s", "%s");', idSrv, name, address, players) )
-	end,
-	Finished = function()
-		pnlMainMenu:Call( "FinishedLoadFavServer()" )
-	end,
-	Type="favorite",
-	GameDir="garrysmod",
-	AppId=4000,
-}
-serverlist.Query( data2 )
-
 function DoStopServers( category )
 	pnlMainMenu:Call( "FinishedServeres( '" .. category:JavascriptSafe() .. "' )" )
 	ShouldStop[ category ] = true
